@@ -33,8 +33,8 @@ extern "C" {
 #include <stddef.h>
 #include <stdint.h>
 
-#include <libheif/heif_version.h>
-
+//#include <libheif/heif_version.h>
+#define LIBHEIF_NUMERIC_VERSION ((1<<24) | (17<<16) | (6<<8) | 0)
 
 // API versions table
 //
