@@ -9,13 +9,13 @@ static int setup_module(PyObject* m) {
     return 0;
 }
 
-PyMODINIT_FUNC PyInit__pillow_heif_x265(void) {
+PyMODINIT_FUNC PyInit__x265(void) {
     static PyModuleDef module_def = {
         PyModuleDef_HEAD_INIT,
-        "_pillow_heif_x265", /* m_name */
-        NULL,                /* m_doc */
-        -1,                  /* m_size */
-        NULL,                /* m_methods */
+        "_x265", /* m_name */
+        NULL,   /* m_doc */
+        -1,     /* m_size */
+        NULL,   /* m_methods */
     };
 
     PyObject* m = PyModule_Create(&module_def);

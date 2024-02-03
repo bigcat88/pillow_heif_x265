@@ -25,7 +25,7 @@ class RequiredDependencyException(Exception):
 
 def get_version():
     """Returns version of the project."""
-    version_file = "pillow_heif_x265/_version.py"
+    version_file = "src/pillow_heif_x265/_version.py"
     exec(compile(Path(version_file).read_text(encoding="utf-8"), version_file, "exec"))  # pylint: disable=exec-used
     return locals()["__version__"]
 
@@ -172,13 +172,13 @@ class PillowHeifBuildExt(build_ext):
 
             if PLATFORM_MINGW:
                 self._update_extension(
-                    "_pillow_heif_x265",
+                    "pillow_heif_x265._x265",
                     ["x265"],
                     extra_compile_args=["-Ofast", "-Werror", *extra_compile_args],
                 )
             else:
                 self._update_extension(
-                    "_pillow_heif_x265",
+                    "pillow_heif_x265._x265",
                     ["libx265"],
                     extra_compile_args=["/d2FH4-", "/WX", *extra_compile_args],
                     extra_link_args=["/WX"],
@@ -206,7 +206,7 @@ class PillowHeifBuildExt(build_ext):
                 self._add_directory(include_dirs, os.path.join(sdk_path, "usr", "include"))
 
             self._update_extension(
-                "_pillow_heif_x265", ["x265"], extra_compile_args=["-Ofast", "-Werror", *extra_compile_args]
+                "pillow_heif_x265._x265", ["x265"], extra_compile_args=["-Ofast", "-Werror", *extra_compile_args]
             )
         else:  # let's assume it's some kind of linux
             # this old code waiting for refactoring, when time comes.
@@ -218,7 +218,7 @@ class PillowHeifBuildExt(build_ext):
             self._add_directory(library_dirs, "/lib")
 
             self._update_extension(
-                "_pillow_heif_x265", ["x265"], extra_compile_args=["-Ofast", "-Werror", *extra_compile_args]
+                "pillow_heif_x265._x265", ["x265"], extra_compile_args=["-Ofast", "-Werror", *extra_compile_args]
             )
 
         self.compiler.library_dirs = library_dirs + self.compiler.library_dirs
@@ -286,9 +286,7 @@ try:
         version=get_version(),
         cmdclass={"build_ext": PillowHeifBuildExt},
         ext_modules=[
-            Extension(
-                "_pillow_heif_x265", ["pillow_heif_x265/_pillow_heif_x265.cc", "third-party/libheif/heif_plugin.cc"]
-            )
+            Extension("pillow_heif_x265._x265", ["src/pillow_heif_x265/_x265.cc", "third-party/libheif/heif_plugin.cc"])
         ],
         zip_safe=not PLATFORM_MINGW,
     )
@@ -296,7 +294,7 @@ except RequiredDependencyException as err:
     msg = f"""
 
 The headers or library files could not be found for {err},
-a required dependency when compiling Pillow-Heif from source.
+a required dependency when compiling Pillow-Heif-x265 from source.
 
 Please see the install instructions at:
    https://pillow-heif.readthedocs.io/en/latest/installation.html

@@ -1,0 +1,48 @@
+name: From source(macOS)
+
+on:
+  workflow_dispatch:
+  workflow_call:
+  pull_request:
+    paths:
+      - '.github/workflows/test-src-build-macos.yml'
+      - 'third-party/**'
+      - 'setup.*'
+      - 'pyproject.toml'
+      - 'src/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-src-build-macos.yml'
+      - 'third-party/**'
+      - 'setup.*'
+      - 'pyproject.toml'
+      - 'src/**'
+
+concurrency:
+  group: src_macos-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  macos_12:
+    name: macOS:12-x86_64
+    runs-on: macos-12
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install x265 from formula
+        run: |
+          brew uninstall --force --ignore-dependencies imagemagick libheif x265
+          brew install --formula ./third-party/x265/macos/x265.rb
+
+      - name: Install libheif from formula
+        run: brew install --formula ./tests/libheif.rb
+
+      - name: Installing Pillow-Heif-x265
+        run: python3 -m pip -v install ".[tests]"
+
+      - name: Install Pillow-Heif
+        run: python3 -m pip install git+https://github.com/bigcat88/pillow_heif.git
+
+      - name: Perform tests
+        run: python3 ./tests/temporary.py

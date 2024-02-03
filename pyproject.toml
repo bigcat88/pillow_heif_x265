@@ -48,7 +48,7 @@ select = ["A", "B", "C", "D", "E", "F", "FURB", "G", "I", "S", "SIM", "PERF", "P
 extend-ignore = ["D107", "D105", "D203", "D213", "D401", "E203", "I001", "RUF100"]
 
 [tool.ruff.per-file-ignores]
-"pillow_heif_x265/__init__.py" = ["F401"]
+"src/pillow_heif_x265/__init__.py" = ["F401"]
 "setup.py" = ["S"]
 
 [tool.ruff.extend-per-file-ignores]
