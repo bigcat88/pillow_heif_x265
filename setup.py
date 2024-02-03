@@ -75,7 +75,8 @@ class PillowHeifBuildExt(build_ext):
             return
 
         # we include "third-party" dir of the project to provide libheif's internal files.
-        include_dirs = [os.path.join(os.path.dirname(os.path.abspath(__file__)), "third-party")]
+        third_party = os.path.join(os.path.dirname(os.path.abspath(__file__)), "third-party")
+        include_dirs = [third_party, os.path.join(third_party, "x265")]
         library_dirs = []
 
         pkg_config = None
