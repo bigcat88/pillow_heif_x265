@@ -45,7 +45,7 @@ jobs:
       - name: Build x265 and dependencies
         shell: msys2 {0}
         run: |
-          cd libheif/windows/mingw-w64-x265
+          cd third-party/x265/windows/mingw-w64-x265
           makepkg-mingw --syncdeps --noconfirm -f
           pacman -U mingw-w64-x86_64-x265-*-any.pkg.tar.zst --noconfirm
 
