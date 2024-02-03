@@ -15,6 +15,7 @@ from setuptools.command.build_ext import build_ext
 
 # pylint: disable=too-many-branches disable=too-many-statements disable=too-many-locals
 LIBX265_ROOT = None
+LIBHEIF_ROOT = None
 PLATFORM_MINGW = os.name == "nt" and "GCC" in sys.version
 
 
@@ -84,6 +85,7 @@ class PillowHeifBuildExt(build_ext):
 
         for root_name, lib_name in {
             "LIBX265_ROOT": ("libx265", "x265"),
+            "LIBHEIF_ROOT": ("libheif", "heif"),
         }.items():
             root = globals()[root_name]
 
@@ -283,7 +285,11 @@ try:
     setup(
         version=get_version(),
         cmdclass={"build_ext": PillowHeifBuildExt},
-        ext_modules=[Extension("_pillow_heif_x265", ["pillow_heif_x265/_pillow_heif_x265.cc"])],
+        ext_modules=[
+            Extension(
+                "_pillow_heif_x265", ["pillow_heif_x265/_pillow_heif_x265.cc", "third-party/libheif/heif_plugin.cc"]
+            )
+        ],
         zip_safe=not PLATFORM_MINGW,
     )
 except RequiredDependencyException as err:

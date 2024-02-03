@@ -18,8 +18,8 @@
  * along with libheif.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "heif.h"
-#include "heif_plugin.h"  // needed to avoid 'unresolved symbols' on Visual Studio compiler
+#include "libheif/heif.h"
+//#include "third-party/libheif/heif_plugin.h"  // needed to avoid 'unresolved symbols' on Visual Studio compiler
 
 struct heif_error heif_error_ok = {heif_error_Ok, heif_suberror_Unspecified, "Success"};
 
@@ -30,5 +30,3 @@ struct heif_error heif_error_unsupported_parameter = {heif_error_Usage_error,
 struct heif_error heif_error_invalid_parameter_value = {heif_error_Usage_error,
                                                         heif_suberror_Invalid_parameter_value,
                                                         "Invalid parameter value"};
-
-

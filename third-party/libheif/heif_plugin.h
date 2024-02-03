@@ -283,9 +283,9 @@ struct heif_encoder_parameter
 };
 
 
-extern struct heif_error heif_error_ok;
-extern struct heif_error heif_error_unsupported_parameter;
-extern struct heif_error heif_error_invalid_parameter_value;
+struct heif_error heif_error_ok;
+struct heif_error heif_error_unsupported_parameter;
+struct heif_error heif_error_invalid_parameter_value;
 
 #define HEIF_WARN_OR_FAIL(strict, image, cmd, cleanupBlock) \
 { struct heif_error e = cmd;                  \
