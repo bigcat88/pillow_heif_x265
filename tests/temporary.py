@@ -4,9 +4,12 @@ from PIL import Image
 from pillow_heif_x265 import get_path
 
 if __name__ == "__main__":
+    print("Before plugin load:")
     print(pillow_heif.libheif_info()["encoders"])
-    print("pillow_heif_x265: ", get_path())
+    print("pillow_heif_x265: get_path=")
+    print(get_path())
     pillow_heif.load_libheif_plugin(get_path())
+    print("After plugin load:")
     print(pillow_heif.libheif_info()["encoders"])
 
     pillow_heif.register_heif_opener()
