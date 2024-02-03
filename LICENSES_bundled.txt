@@ -1,0 +1,7 @@
+License for "pillow-heif-x265" binary wheels: GPLv2, due to x265 library license.
+
+Name: x265
+License: GPLv2
+Files: libx265.[dylib|so|dll]
+  For details, see https://bitbucket.org/multicoreware/x265_git/src/Release_3.4/COPYING
+  Source code: https://bitbucket.org/multicoreware/x265_git/src/Release_3.4

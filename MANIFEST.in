@@ -1,0 +1,17 @@
+include README.md
+include CHANGELOG.md
+include pyproject.toml
+
+recursive-include pillow_heif_x265 *.cc *.h
+
+graft libheif
+graft tests
+
+exclude *.yaml
+exclude *.yml
+exclude .cirrus.star
+
+prune ci
+prune docker
+
+recursive-exclude **/__pycache__ *
