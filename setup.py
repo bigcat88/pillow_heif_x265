@@ -74,7 +74,8 @@ class PillowHeifBuildExt(build_ext):
         if os.getenv("PRE_COMMIT"):
             return
 
-        include_dirs = [os.getcwd()]
+        # we include "third-party" dir of the project to provide libheif's internal files.
+        include_dirs = [os.path.join(os.path.dirname(os.path.abspath(__file__)), "third-party")]
         library_dirs = []
 
         pkg_config = None
@@ -164,11 +165,6 @@ class PillowHeifBuildExt(build_ext):
                 copy(lib_export_file, os.path.join(library_dir, "libx265.lib"))
             else:
                 warn("If you build this with MSYS2, you should not see this warning.", stacklevel=1)
-
-            # on Windows, we include "root" of the project instead of MSYS2 directory.
-            # Including MSYS2 directory leads to compilation errors, theirs `stdio.h` and other files are different.
-            # ATTENTION: If someone knows how without hacks include MSYS2 directory as last directory in list - help!
-            self.compiler.include_dirs.append(os.path.dirname(os.path.abspath(__file__)))
 
             if PLATFORM_MINGW:
                 self._update_extension(
@@ -285,9 +281,7 @@ try:
     setup(
         version=get_version(),
         cmdclass={"build_ext": PillowHeifBuildExt},
-        ext_modules=[
-            Extension("pillow_heif_x265._x265", ["src/pillow_heif_x265/_x265.cc", "third-party/libheif/heif_plugin.cc"])
-        ],
+        ext_modules=[Extension("pillow_heif_x265._x265", ["src/pillow_heif_x265/_x265.cc"])],
         zip_safe=not PLATFORM_MINGW,
     )
 except RequiredDependencyException as err:

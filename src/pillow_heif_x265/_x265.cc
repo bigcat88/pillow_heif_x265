@@ -1,7 +1,7 @@
 #define PY_SSIZE_T_CLEAN
 
 #include "Python.h"
-#include "third-party/libheif/plugins/encoder_x265.cc"
+#include "libheif/plugins/encoder_x265.cc"
 
 /* =========== Module =========== */
 

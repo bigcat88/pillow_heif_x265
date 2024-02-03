@@ -19,7 +19,6 @@
  */
 
 #include "libheif/heif.h"
-//#include "third-party/libheif/heif_plugin.h"  // needed to avoid 'unresolved symbols' on Visual Studio compiler
 
 struct heif_error heif_error_ok = {heif_error_Ok, heif_suberror_Unspecified, "Success"};
 
