@@ -67,7 +67,7 @@ jobs:
           pacman -U mingw-w64-x86_64-libheif-*-any.pkg.tar.zst --noconfirm
 
       - name: Installing Pillow-Heif-x265
-        run: SETUPTOOLS_USE_DISTUTILS=stdlib python -m pip -v install ".[tests]"
+        run: SETUPTOOLS_USE_DISTUTILS=stdlib python3 -m pip -v install ".[tests]"
 
       - name: Install Pillow-Heif
         run: python3 -m pip install git+https://github.com/bigcat88/pillow_heif.git

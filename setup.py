@@ -162,8 +162,18 @@ class PillowHeifBuildExt(build_ext):
             # self._add_directory(include_dirs, path.join(include_path_prefix, "include"))
             self._add_directory(library_dirs, library_dir)
             lib_export_file = Path(os.path.join(library_dir, "libx265.dll.a"))
-            if lib_export_file.is_file():
-                copy(lib_export_file, os.path.join(library_dir, "libx265.lib"))
+            dest_lib_present = Path(os.path.join(library_dir, "libx265.lib"))
+            if lib_export_file.is_file() and not dest_lib_present.is_file():
+                print(f"Copying {lib_export_file} to {dest_lib_present}")
+                copy(lib_export_file, dest_lib_present)
+            else:
+                warn("If you build this with MSYS2, you should not see this warning.", stacklevel=1)
+
+            lib_export_file = Path(os.path.join(library_dir, "libheif.dll.a"))
+            dest_lib_present = Path(os.path.join(library_dir, "libheif.lib"))
+            if lib_export_file.is_file() and not dest_lib_present.is_file():
+                print(f"Copying {lib_export_file} to {dest_lib_present}")
+                copy(lib_export_file, dest_lib_present)
             else:
                 warn("If you build this with MSYS2, you should not see this warning.", stacklevel=1)
 
