@@ -8,6 +8,21 @@ class X265 < Formula
   license "GPL-2.0-only"
   head "https://bitbucket.org/multicoreware/x265_git.git", branch: "master"
 
+  bottle do
+    rebuild 1
+    sha256 cellar: :any,                 arm64_sonoma:   "d9979f7990c114bc1283c75b7e3b186fd0a979af6206bf2675998d8189bdd7e5"
+    sha256 cellar: :any,                 arm64_ventura:  "fc0bf01af954762a85e8b808d5b03d28b9e36e8e71035783e39bb9dc0307abea"
+    sha256 cellar: :any,                 arm64_monterey: "e60559191a9aba607e512ad33ac9f66688b12837df7e6a3cf57ceae26968235b"
+    sha256 cellar: :any,                 arm64_big_sur:  "adc617eed2e065af669994fb5b538195fd46db4ac7b13c7ca2490dc8abaf6466"
+    sha256 cellar: :any,                 sonoma:         "26943ec04286b0669309ea55b9eff3db0bb581761be7b21170b42f8b52ec5045"
+    sha256 cellar: :any,                 ventura:        "42bac1c3760905fc0f6c8ee2af2b97c5ef371d6135f6822357afe91f4014a2dd"
+    sha256 cellar: :any,                 monterey:       "be446f5c7cb4872205f260b8821fc7ebd5bd7c4b8837888c98c08e051dff2e3f"
+    sha256 cellar: :any,                 big_sur:        "55bb46a5dc1924e59b7fa7bc800a21c0cf21355e48cb38b941d8e786427c70a0"
+    sha256 cellar: :any,                 catalina:       "5e5bc106e1cf971a176dd5b37a61d28769e353f81102c011b4230cc8732eca7a"
+    sha256 cellar: :any,                 mojave:         "c61ebdf9dcd4aedf5da2a7eb2b3a5154fd355c105a19a0471d43a3aa67f3cb88"
+    sha256 cellar: :any_skip_relocation, x86_64_linux:   "c80f18988caea25e95ca87dd648f5ff8b0856e24d26adc8d68ca68cc6d4faabf"
+  end
+
   depends_on "cmake" => :build
 
   on_intel do
